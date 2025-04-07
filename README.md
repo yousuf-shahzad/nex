@@ -101,6 +101,74 @@ nex run --ram 4G
 nex setup --dir my_server --version 1.20.1 --type paper --difficulty hard --motd "My Awesome Server" --max-players 10
 ```
 
+## Plugin Management
+
+Nex includes a powerful plugin management system that supports multiple plugin sources and handles dependencies automatically.
+
+### Supported Plugin Sources
+- SpigotMC
+- Modrinth
+- Hangar
+- Bukkit
+
+### Plugin Commands
+
+#### Search for Plugins
+```bash
+nex plugins search <server_dir> <query> [--source SOURCE] [--category CATEGORY]
+```
+
+#### Install a Plugin
+```bash
+nex plugins install <server_dir> <plugin_id> <source> [--version VERSION]
+```
+
+#### List Installed Plugins
+```bash
+nex plugins list <server_dir>
+```
+
+#### Enable/Disable Plugins
+```bash
+nex plugins enable <server_dir> <plugin_name>
+nex plugins disable <server_dir> <plugin_name>
+```
+
+#### Delete a Plugin
+```bash
+nex plugins delete <server_dir> <plugin_name>
+```
+
+#### Update a Plugin
+```bash
+nex plugins update <server_dir> <plugin_name>
+```
+
+#### Pin Plugin Version
+```bash
+nex plugins pin <server_dir> <plugin_name> <version>
+nex plugins unpin <server_dir> <plugin_name>
+```
+
+#### Check Dependencies
+```bash
+nex plugins check-deps <server_dir> <plugin_name>
+```
+
+#### Configure Plugin
+```bash
+nex plugins configure <server_dir> <plugin_name> <key1>=<value1> [<key2>=<value2> ...]
+```
+
+### Features
+- Automatic dependency resolution
+- Version compatibility checking
+- Plugin state management (enabled/disabled)
+- Configuration file management
+- Multiple plugin source support
+- Version pinning
+- Dependency tracking
+
 ## License
 
 MIT
