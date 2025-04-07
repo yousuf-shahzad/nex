@@ -4,6 +4,8 @@ Bukkit repository implementation.
 from typing import Dict, List, Any, Optional
 from .base import BaseRepository
 
+# work on this another time, placeholder bukkit api
+
 class BukkitRepository(BaseRepository):
     """Repository implementation for Bukkit."""
     
@@ -13,21 +15,15 @@ class BukkitRepository(BaseRepository):
     
     def search(self, query: str, category: Optional[str] = None) -> List[Dict[str, Any]]:
         """Search for plugins on Bukkit."""
-        # This would use CurseForge API which requires an API key
-        # For this example, we'll return an empty list
-        # In a real implementation, you'd use the CurseForge API
+        # need API key!
         return []
     
     def get_plugin_info(self, plugin_id: str, version: Optional[str] = None) -> Optional[Dict[str, Any]]:
         """Get plugin information from Bukkit."""
-        # This would use CurseForge API which requires an API key
-        # For this example, we'll return None
-        # In a real implementation, you'd use the CurseForge API
+        
         return None
     
     def download_plugin(self, plugin_id: str, version: Optional[str] = None) -> Optional[bytes]:
         """Download a plugin from Bukkit."""
-        # This would use CurseForge API which requires an API key
-        # For this example, we'll return None
-        # In a real implementation, you'd use the CurseForge API
+        
         return None 
