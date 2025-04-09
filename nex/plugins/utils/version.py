@@ -19,7 +19,7 @@ class VersionManager:
         """Initialize with server directory path."""
         self.server_dir = server_dir
     
-    def check_version_compatibility(self, plugin_id: str, source: str, version: str) -> bool:
+    def check_version_compatibility(self, plugin_id: str, source: str, plugin_version: str) -> bool:
         """Check if a plugin version is compatible with the server version."""
         # Get server version from server.properties
         server_props = self.server_dir / "server.properties"
@@ -35,7 +35,7 @@ class VersionManager:
                 return True  # If no version found, assume compatibility
         
         # Get plugin version info
-        plugin_info = self._get_plugin_info(plugin_id, source, version)
+        plugin_info = self._get_plugin_info(plugin_id, source, plugin_version)
         if not plugin_info:
             return True  # If can't get plugin info, assume compatibility
         
@@ -50,7 +50,7 @@ class VersionManager:
         
         return True
     
-    def _get_plugin_info(self, plugin_id: str, source: str, version: Optional[str] = None) -> Optional[Dict[str, Any]]:
+    def _get_plugin_info(self, plugin_id: str, source: str, plugin_version: Optional[str] = None) -> Optional[Dict[str, Any]]:
         """Get detailed information about a plugin from its source."""
         # This would be implemented by the repository classes
         # For now, return None as a placeholder

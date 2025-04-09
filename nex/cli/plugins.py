@@ -95,7 +95,7 @@ def register_plugin_commands(cli_group):
                 console.print(f"  {i}. {source}")
             
             source_choice = click.prompt("\nEnter source number", type=int)
-            if not 1 <= source_choice <= 4:
+            if not 1 <= source_choice <= 2:
                 console.print("[red]Invalid choice[/red]")
                 sys.exit(1)
             source = ["spigot", "modrinth"][source_choice - 1]
