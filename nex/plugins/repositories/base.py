@@ -30,6 +30,10 @@ class BaseRepository(ABC):
         """Download a plugin file."""
         pass
     
+    def get_versions(self, plugin_id: str) -> List[str]:
+        """Get available versions for a plugin."""
+        return []
+    
     def _make_request(self, url: str, params: Optional[Dict[str, Any]] = None) -> Optional[Dict[str, Any]]:
         """Make an HTTP request to the repository API."""
         try:

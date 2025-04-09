@@ -47,7 +47,7 @@ class PluginManager:
         }
         
         # Initialize utilities
-        self.dependency_resolver = DependencyResolver(self.plugins_data)
+        self.dependency_resolver = DependencyResolver(self.plugins_data, self.repositories)
         self.version_manager = VersionManager(self.server_dir)
         
         # Create plugins directory if it doesn't exist

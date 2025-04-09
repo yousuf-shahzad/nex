@@ -16,13 +16,15 @@ class HangarRepository(BaseRepository):
         """Search for plugins on Hangar."""
         url = f"{self.base_url}/projects"
         params = {
-            "q": query,
+            "query": query,
             "limit": 20,
-            "platforms": "paper"
+            "offset": 0,
+            "sort": "downloads",
+            "platform": "paper"
         }
         
         if category:
-            params["categories"] = category
+            params["category"] = category
             
         data = self._make_request(url, params)
         if not data:
@@ -31,14 +33,14 @@ class HangarRepository(BaseRepository):
         results = []
         for item in data.get("result", []):
             results.append({
-                "id": f"{item['owner']}:{item['name']}",
+                "id": f"{item['namespace']['owner']}:{item['name']}",
                 "name": item["name"],
                 "description": item.get("description", ""),
                 "downloads": item.get("stats", {}).get("downloads", 0),
                 "version": "Latest",  # Would need another API call for specific version
                 "source": "hangar",
-                "author": item.get("owner", "Unknown"),
-                "url": f"https://hangar.papermc.io/projects/{item['owner']}/{item['name']}"
+                "author": item.get("namespace", {}).get("owner", "Unknown"),
+                "url": f"https://hangar.papermc.io/{item['namespace']['owner']}/{item['namespace']['slug']}"
             })
         
         return results
@@ -57,7 +59,7 @@ class HangarRepository(BaseRepository):
             "description": data.get("description", ""),
             "version": "Latest",  # Would need another API call for specific version
             "downloads": data.get("stats", {}).get("downloads", 0),
-            "author": data.get("owner", "Unknown"),
+            "author": data.get("namespace", {}).get("owner", "Unknown"),
             "dependencies": data.get("dependencies", []),
             "min_server_version": data.get("min_server_version"),
             "max_server_version": data.get("max_server_version")
@@ -99,4 +101,18 @@ class HangarRepository(BaseRepository):
             response.raise_for_status()
             return response.content
         except requests.RequestException:
-            return None 
+            return None
+    
+    def get_versions(self, plugin_id: str) -> List[str]:
+        """Get available versions for a plugin."""
+        owner, name = plugin_id.split(":", 1)
+        url = f"{self.base_url}/projects/{owner}/{name}/versions"
+        data = self._make_request(url)
+        if not data:
+            return []
+        
+        versions = []
+        platform_versions = data.get("paper", [])
+        for version in platform_versions:
+            versions.append(version.get("name", "Unknown"))
+        return versions

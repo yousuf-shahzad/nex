@@ -14,9 +14,10 @@ class DependencyError(Exception):
 class DependencyResolver:
     """Handles plugin dependency resolution and management."""
     
-    def __init__(self, plugins_data: Dict[str, Any]):
-        """Initialize with plugin tracking data."""
+    def __init__(self, plugins_data: Dict[str, Any], repositories: Dict[str, Any]):
+        """Initialize with plugin tracking data and repositories."""
         self.plugins_data = plugins_data
+        self.repositories = repositories
     
     def resolve_dependencies(self, plugin_id: str, source: str, version: Optional[str] = None) -> List[Dict[str, Any]]:
         """Resolve and return a list of all dependencies for a plugin."""
@@ -30,7 +31,7 @@ class DependencyResolver:
             visited.add((plugin_id, source))
             
             # Get plugin info and dependencies
-            plugin_info = self._get_plugin_info(plugin_id, source, version)
+            plugin_info = self.repositories[source].get_plugin_info(plugin_id, version)
             if not plugin_info:
                 raise DependencyError(f"Could not find plugin {plugin_id} from {source}")
             
@@ -74,13 +75,20 @@ class DependencyResolver:
                 })
             else:
                 source, dep_id = dep_key.split(":", 1)
-                dep_info = self._get_plugin_info(dep_id, source)
-                if dep_info:
-                    dependencies.append({
-                        "name": dep_info["name"],
-                        "version": dep_info.get("version", "unknown"),
-                        "status": "available"
-                    })
+                if source in self.repositories:
+                    dep_info = self.repositories[source].get_plugin_info(dep_id)
+                    if dep_info:
+                        dependencies.append({
+                            "name": dep_info["name"],
+                            "version": dep_info.get("version", "unknown"),
+                            "status": "available"
+                        })
+                    else:
+                        dependencies.append({
+                            "name": dep_id,
+                            "version": "unknown",
+                            "status": "unavailable"
+                        })
                 else:
                     dependencies.append({
                         "name": dep_id,
@@ -95,10 +103,4 @@ class DependencyResolver:
         for dep_key in self.plugins_data["dependency_graph"].get(plugin_key, []):
             check_dep(dep_key)
         
-        return dependencies
-    
-    def _get_plugin_info(self, plugin_id: str, source: str, version: Optional[str] = None) -> Optional[Dict[str, Any]]:
-        """Get detailed information about a plugin from its source."""
-        # This would be implemented by the repository classes
-        # For now, return None as a placeholder
-        return None 
+        return dependencies 
