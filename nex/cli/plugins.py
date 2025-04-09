@@ -231,8 +231,138 @@ def register_plugin_commands(cli_group):
         manager = PluginManager(server_dir)
         try:
             console.print(f"[bold]Removing plugin: {plugin_name}[/bold]")
-            manager.remove_plugin(plugin_name)
+            manager.delete_plugin(plugin_name)
             console.print(f"[green]Successfully removed plugin: {plugin_name}[/green]")
+        except Exception as e:
+            console.print(f"[red]Error: {str(e)}[/red]")
+            sys.exit(1)
+    
+    @plugin.command("enable")
+    @click.argument("plugin_name")
+    @click.option("--server-dir", "-d", default=".", help="Server directory")
+    def enable_plugin(plugin_name, server_dir):
+        """Enable a plugin."""
+        manager = PluginManager(server_dir)
+        try:
+            success = manager.enable_plugin(plugin_name)
+            if not success:
+                sys.exit(1)
+        except Exception as e:
+            console.print(f"[red]Error: {str(e)}[/red]")
+            sys.exit(1)
+    
+    @plugin.command("disable")
+    @click.argument("plugin_name")
+    @click.option("--server-dir", "-d", default=".", help="Server directory")
+    def disable_plugin(plugin_name, server_dir):
+        """Disable a plugin."""
+        manager = PluginManager(server_dir)
+        try:
+            success = manager.disable_plugin(plugin_name)
+            if not success:
+                sys.exit(1)
+        except Exception as e:
+            console.print(f"[red]Error: {str(e)}[/red]")
+            sys.exit(1)
+    
+    @plugin.command("update")
+    @click.argument("plugin_name")
+    @click.option("--server-dir", "-d", default=".", help="Server directory")
+    def update_plugin(plugin_name, server_dir):
+        """Update a plugin to the latest version."""
+        manager = PluginManager(server_dir)
+        try:
+            success = manager.update_plugin(plugin_name)
+            if not success:
+                sys.exit(1)
+        except Exception as e:
+            console.print(f"[red]Error: {str(e)}[/red]")
+            sys.exit(1)
+    
+    @plugin.command("configure")
+    @click.argument("plugin_name")
+    @click.option("--server-dir", "-d", default=".", help="Server directory")
+    @click.option("--set", "-s", multiple=True, help="Set config values (format: key=value)")
+    def configure_plugin(plugin_name, server_dir, set):
+        """Configure a plugin's settings."""
+        manager = PluginManager(server_dir)
+        try:
+            # Parse config values
+            config_values = {}
+            for item in set:
+                try:
+                    key, value = item.split("=", 1)
+                    # Try to convert to appropriate type
+                    try:
+                        value = int(value)
+                    except ValueError:
+                        try:
+                            value = float(value)
+                        except ValueError:
+                            if value.lower() in ["true", "false"]:
+                                value = value.lower() == "true"
+                    config_values[key] = value
+                except ValueError:
+                    console.print(f"[red]Invalid config format: {item}. Use key=value format.[/red]")
+                    sys.exit(1)
+            
+            success = manager.configure_plugin(plugin_name, config_values)
+            if not success:
+                sys.exit(1)
+        except Exception as e:
+            console.print(f"[red]Error: {str(e)}[/red]")
+            sys.exit(1)
+    
+    @plugin.command("pin-version")
+    @click.argument("plugin_name")
+    @click.argument("version")
+    @click.option("--server-dir", "-d", default=".", help="Server directory")
+    def pin_version(plugin_name, version, server_dir):
+        """Pin a plugin to a specific version."""
+        manager = PluginManager(server_dir)
+        try:
+            success = manager.pin_version(plugin_name, version)
+            if not success:
+                sys.exit(1)
+        except Exception as e:
+            console.print(f"[red]Error: {str(e)}[/red]")
+            sys.exit(1)
+    
+    @plugin.command("unpin-version")
+    @click.argument("plugin_name")
+    @click.option("--server-dir", "-d", default=".", help="Server directory")
+    def unpin_version(plugin_name, server_dir):
+        """Remove version pin from a plugin."""
+        manager = PluginManager(server_dir)
+        try:
+            success = manager.unpin_version(plugin_name)
+            if not success:
+                sys.exit(1)
+        except Exception as e:
+            console.print(f"[red]Error: {str(e)}[/red]")
+            sys.exit(1)
+    
+    @plugin.command("check-dependencies")
+    @click.argument("plugin_name")
+    @click.option("--server-dir", "-d", default=".", help="Server directory")
+    def check_dependencies(plugin_name, server_dir):
+        """Check dependencies for a plugin."""
+        manager = PluginManager(server_dir)
+        try:
+            dependencies = manager.check_dependencies(plugin_name)
+            if not dependencies:
+                console.print(f"[yellow]No dependencies found for plugin: {plugin_name}[/yellow]")
+                return
+            
+            console.print(f"[bold]Dependencies for {plugin_name}:[/bold]")
+            for dep in dependencies:
+                status_color = {
+                    "installed": "green",
+                    "available": "yellow",
+                    "unavailable": "red"
+                }.get(dep["status"], "white")
+                
+                console.print(f"  • {dep['name']} (v{dep['version']}) - [{status_color}]{dep['status']}[/{status_color}]")
         except Exception as e:
             console.print(f"[red]Error: {str(e)}[/red]")
             sys.exit(1)
