@@ -1,3 +1,6 @@
+"""
+Core server management functionality
+"""
 import os
 import shutil
 import subprocess
@@ -6,9 +9,9 @@ from typing import Dict, List, Any, Optional
 import signal
 import sys
 
-from .downloaders import get_downloader_for_type
-from .config.properties import ServerProperties
-from .utils.java_utils import find_java_executable
+from nex.downloaders import get_downloader_for_type
+from nex.config.properties import ServerProperties
+from nex.utils.java_utils import find_java_executable
 
 
 class ServerManager:
@@ -92,6 +95,9 @@ class ServerManager:
         
         print(f"Starting server with command: {' '.join(cmd)}")
         
+        # Initialize process to None
+        process = None
+
         # Handle Ctrl+C gracefully by passing it through to the server
         def signal_handler(sig, frame):
             print("Stopping the server gracefully...")
@@ -122,4 +128,4 @@ class ServerManager:
                 
             process.wait()
         except Exception as e:
-            raise RuntimeError(f"Failed to run server: {str(e)}")
+            raise RuntimeError(f"Failed to run server: {str(e)}") 

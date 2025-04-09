@@ -46,14 +46,3 @@ logs/
 .env
 .env.local
 .env.*.local
-
-# Minecraft server specific
-server/
-*.jar
-*.properties
-world/
-plugins/
-logs/
-crash-reports/
-eula.txt
-server.properties 
