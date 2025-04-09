@@ -49,15 +49,25 @@ class SpigotRepository(BaseRepository):
         """Get plugin information from SpigotMC."""
         url = f"{self.base_url}/resources/{plugin_id}"
         data = self._make_request(url)
-        author = data['author']['id']
         if not data:
             return None
+        
+        # Get version information if specified
+        version_info = None
+        if version:
+            versions_url = f"{self.base_url}/resources/{plugin_id}/versions"
+            versions_data = self._make_request(versions_url)
+            if versions_data:
+                for ver in versions_data:
+                    if ver.get("name") == version:
+                        version_info = ver
+                        break
         
         return {
             "id": str(data["id"]),
             "name": data["name"],
             "description": data.get("tag", ""),
-            "version": data.get("version", "Unknown"),
+            "version": version or data.get("version", "Unknown"),
             "downloads": data.get("downloads", 0),
             "author": data.get("author", {}).get("name", "Unknown"),
             "dependencies": data.get("dependencies", []),
