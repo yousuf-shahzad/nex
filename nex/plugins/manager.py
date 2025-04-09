@@ -14,7 +14,7 @@ import click
 from datetime import datetime
 from packaging import version
 
-from .repositories import SpigotRepository, ModrinthRepository, HangarRepository, BukkitRepository
+from .repositories import SpigotRepository, ModrinthRepository
 from .utils.dependency import DependencyResolver, DependencyError
 from .utils.version import VersionManager, VersionError
 
@@ -23,9 +23,7 @@ console = Console()
 # Supported repository types
 REPO_TYPES = {
     "spigot": "https://api.spiget.org/v2",
-    "bukkit": "https://dev.bukkit.org/projects",
-    "modrinth": "https://api.modrinth.com/v2",
-    "hangar": "https://hangar.papermc.io/api/v1"
+    "modrinth": "https://api.modrinth.com/v2"
 }
 
 class PluginManager:
@@ -41,9 +39,7 @@ class PluginManager:
         # Initialize repositories
         self.repositories = {
             "spigot": SpigotRepository(),
-            "modrinth": ModrinthRepository(),
-            "hangar": HangarRepository(),
-            "bukkit": BukkitRepository()
+            "modrinth": ModrinthRepository()
         }
         
         # Initialize utilities
@@ -66,9 +62,7 @@ class PluginManager:
                     if "repositories" not in data:
                         data["repositories"] = {
                             "spigot": True,
-                            "bukkit": True,
-                            "modrinth": True,
-                            "hangar": True
+                            "modrinth": True
                         }
                     if "dependency_graph" not in data:
                         data["dependency_graph"] = {}
@@ -83,9 +77,7 @@ class PluginManager:
             "plugins": {},
             "repositories": {
                 "spigot": True,
-                "bukkit": True,
-                "modrinth": True,
-                "hangar": True
+                "modrinth": True
             },
             "dependency_graph": {},
             "version_pins": {}

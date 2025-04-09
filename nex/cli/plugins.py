@@ -27,7 +27,7 @@ def register_plugin_commands(cli_group):
     @click.option("--server-dir", "-d", default=".", help="Server directory")
     @click.option("--version", "-v", help="Plugin version to install")
     @click.option("--source", "-s", default="spigot", 
-                 help="Plugin source (e.g., spigot, bukkit, modrinth, hangar)")
+                 help="Plugin source (e.g., spigot, modrinth)")
     @click.option("--interactive", "-i", is_flag=True, help="Use interactive mode")
     def install_plugin(plugin_id: Optional[str], server_dir: str, version: Optional[str], 
                       source: str, interactive: bool):
@@ -54,8 +54,8 @@ def register_plugin_commands(cli_group):
             
             # Validate source
             source = source.lower()
-            if source not in ["spigot", "bukkit", "modrinth", "hangar"]:
-                console.print("[red]Invalid source. Choose from: spigot, bukkit, modrinth, hangar[/red]")
+            if source not in ["spigot", "modrinth"]:
+                console.print("[red]Invalid source. Choose from: spigot or modrinth[/red]")
                 sys.exit(1)
             
             # Show available versions if version not specified
@@ -91,14 +91,14 @@ def register_plugin_commands(cli_group):
             # Step 1: Choose source
             console.print("\n[bold]Step 1: Choose plugin source[/bold]")
             console.print("Available sources:")
-            for i, source in enumerate(["spigot", "bukkit", "modrinth", "hangar"], 1):
+            for i, source in enumerate(["spigot", "modrinth"], 1):
                 console.print(f"  {i}. {source}")
             
             source_choice = click.prompt("\nEnter source number", type=int)
             if not 1 <= source_choice <= 4:
                 console.print("[red]Invalid choice[/red]")
                 sys.exit(1)
-            source = ["spigot", "bukkit", "modrinth", "hangar"][source_choice - 1]
+            source = ["spigot", "modrinth"][source_choice - 1]
             
             # Step 2: Search for plugin
             console.print("\n[bold]Step 2: Search for plugin[/bold]")
@@ -203,8 +203,8 @@ def register_plugin_commands(cli_group):
         manager = PluginManager(".")
         try:
             console.print(f"[bold]Searching for plugins matching '{search_term}' on {source}...[/bold]")
-            if source not in ["spigot", "bukkit", "hangar", "modrinth"]:
-                console.print("[red]Invalid source. Choose from: spigot, bukkit, hangar, modrinth[/red]")
+            if source not in ["spigot", "modrinth"]:
+                console.print("[red]Invalid source. Choose from: spigot or modrinth[/red]")
                 return
             
             results = manager.search_plugins(search_term, source=source)
