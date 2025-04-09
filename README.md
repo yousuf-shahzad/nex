@@ -28,11 +28,6 @@ cd nex
 pip install -e .
 ```
 
-#### From PyPI (Coming Soon)
-```bash
-pip install nex-mc
-```
-
 ## Project Structure
 
 ```
