@@ -1,18 +1,30 @@
 # Nex - Minecraft Server Management Tool
 
-Nex is a powerful command-line tool for managing Minecraft servers. It simplifies the process of downloading, configuring, and running Minecraft servers on Windows, macOS, and Linux.
+<div align="center">
 
-## Features
+![Nex Banner](https://img.shields.io/badge/NEX-Minecraft%20Server%20Management-brightgreen?style=for-the-badge)
 
-- Download server JARs for any Minecraft version (Vanilla, Paper, or Purpur)
-- Automatically set up server configuration files
-- Customize server properties via command-line flags or interactive prompts
-- List available versions for any server type
-- Run servers with configurable memory settings
-- Cross-platform support (Windows, macOS, and Linux)
-- Comprehensive plugin management system
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?)](https://opensource.org/licenses/MIT)
+[![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
+[![Java 17+](https://img.shields.io/badge/java-17%2B-orange.svg)](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
+[![GitHub issues](https://img.shields.io/github/issues/yousuf-shahzad/nex)](https://github.com/yousuf-shahzad/nex/issues)
 
-## Installation
+**Simplify Minecraft server management with one powerful command-line tool**
+
+[Installation](#installation) • [Features](#features) • [Quick Start](#quick-start) • [Documentation](#usage) • [Contributing](#contributing)
+
+</div>
+
+## ✨ Features
+
+- 🚀 **Multi-Server Support**: Download and manage Vanilla, Paper, or Purpur servers
+- ⚙️ **Effortless Configuration**: Set up server properties via CLI flags or interactive wizard
+- 🔌 **Plugin Management**: Search, install, and manage plugins from multiple sources
+- 🛠️ **Version Control**: Easily switch between Minecraft versions with proper Java compatibility
+- 📊 **Performance Optimization**: Configure memory settings and server properties for optimal performance
+- 💻 **Cross-Platform**: Works seamlessly on Windows, macOS, and Linux
+
+## 📋 Installation
 
 ### Prerequisites
 
@@ -28,7 +40,18 @@ cd nex
 pip install -e .
 ```
 
-## Project Structure
+## 🚀 Quick Start
+
+```bash
+# Download and set up a Paper server in one command
+nex setup --dir my_server --version 1.20.1 --type paper --difficulty normal --motd "My Awesome Server"
+
+# Start your server
+cd my_server
+nex run --ram 4G
+```
+
+## 📁 Project Structure
 
 ```
 nex/
@@ -40,22 +63,15 @@ nex/
 └── downloaders/   # Server download implementations
 ```
 
-## Minecraft Server Version and Java Compatibility Matrix
-
-Below is a compatibility matrix for Minecraft server versions and their corresponding Java version requirements or recommendations, based on official specifications and community standards:
-
-| **Minecraft Version** | **Minimum Java Version** | **Recommended Java Version** | **Notes**                                                                 |
-|-----------------------|--------------------------|------------------------------|---------------------------------------------------------------------------|
-| 1.2.5 - 1.7.10        | Java 6                   | Java 8                       | Older versions work with Java 6 or 7, but Java 8 is widely recommended for stability. |
-| 1.8 - 1.12.2          | Java 8                   | Java 8                       | Java 8 is the standard; later versions may cause compatibility issues with mods/plugins. |
-| 1.13 - 1.16.5         | Java 8                   | Java 11 or 16                | Java 8 works, but Java 11 or 16 can improve performance; some mods require Java 16. |
-| 1.17 - 1.17.1         | Java 16                  | Java 17                      | Java 16 is required; Java 17 is recommended for better performance.        |
-| 1.18 - 1.20.4         | Java 17                  | Java 17                      | Java 17 is the minimum and recommended version.                           |
-| 1.20.5 - 1.21.4       | Java 21                  | Java 21                      | Java 21 is required starting with 1.20.5 due to updated class file versions. |
-
-## Usage
+## 💻 Usage
 
 ### Server Management
+
+### Sign EULA
+```bash
+# Sign the EULA
+nex sign
+```
 
 #### Download a Server
 ```bash
@@ -148,7 +164,20 @@ nex plugins check-deps <server_dir> <plugin_name>
 nex plugins configure <server_dir> <plugin_name> <key1>=<value1> [<key2>=<value2> ...]
 ```
 
-## Examples
+## 📊 Minecraft Server Version and Java Compatibility Matrix
+
+Below is a compatibility matrix for Minecraft server versions and their corresponding Java version requirements:
+
+| **Minecraft Version** | **Minimum Java Version** | **Recommended Java Version** | **Notes**                                                                 |
+|-----------------------|--------------------------|------------------------------|---------------------------------------------------------------------------|
+| 1.2.5 - 1.7.10        | Java 6                   | Java 8                       | Older versions work with Java 6 or 7, but Java 8 is widely recommended for stability. |
+| 1.8 - 1.12.2          | Java 8                   | Java 8                       | Java 8 is the standard; later versions may cause compatibility issues with mods/plugins. |
+| 1.13 - 1.16.5         | Java 8                   | Java 11 or 16                | Java 8 works, but Java 11 or 16 can improve performance; some mods require Java 16. |
+| 1.17 - 1.17.1         | Java 16                  | Java 17                      | Java 16 is required; Java 17 is recommended for better performance.        |
+| 1.18 - 1.20.4         | Java 17                  | Java 17                      | Java 17 is the minimum and recommended version.                           |
+| 1.20.5 - 1.21.4       | Java 21                  | Java 21                      | Java 21 is required starting with 1.20.5 due to updated class file versions. |
+
+## 📚 Examples
 
 ### Complete Server Setup
 ```bash
@@ -175,10 +204,32 @@ nex setup --dir my_server \
     --max-players 10
 ```
 
-## Contributing
+## 📝 Roadmap
+
+Here are some features planned for future releases:
+
+- **Backup and Restore**: Backup and restore functionality
+- **Forge & Fabric Support**: Download and manage modded server types
+- **Mod Management**: Install and configure mods similar to plugins
+- **Additional Plugin Sources**: Integration with Bukkit and other repositories
+- **Scheduled Backups**: Automated backup scheduling
+- **Web Interface**: Easy server management through a browser
+
+## 🤝 Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-## License
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-MIT
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- The Minecraft community
+- [Paper](https://papermc.io/) and [Purpur](https://purpurmc.org/) projects
