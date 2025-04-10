@@ -1,4 +1,4 @@
-# Nex - Minecraft Server Management Tool
+![NEX](nex-banner.png)
 
 <div align="center">
 
