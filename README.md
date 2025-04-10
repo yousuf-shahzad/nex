@@ -11,7 +11,7 @@
 
 **Simplify Minecraft server management with one powerful command-line tool**
 
-[Installation](#installation) • [Features](#features) • [Quick Start](#quick-start) • [Documentation](#usage) • [Contributing](#contributing)
+[Installation](#-installation) • [Features](#-features) • [Quick Start](#-quick-start) • [Documentation](#-usage) • [Contributing](#-contributing)
 
 </div>
 
