@@ -40,6 +40,19 @@ nex/
 └── downloaders/   # Server download implementations
 ```
 
+## Minecraft Server Version and Java Compatibility Matrix
+
+Below is a compatibility matrix for Minecraft server versions and their corresponding Java version requirements or recommendations, based on official specifications and community standards:
+
+| **Minecraft Version** | **Minimum Java Version** | **Recommended Java Version** | **Notes**                                                                 |
+|-----------------------|--------------------------|------------------------------|---------------------------------------------------------------------------|
+| 1.2.5 - 1.7.10        | Java 6                   | Java 8                       | Older versions work with Java 6 or 7, but Java 8 is widely recommended for stability. |
+| 1.8 - 1.12.2          | Java 8                   | Java 8                       | Java 8 is the standard; later versions may cause compatibility issues with mods/plugins. |
+| 1.13 - 1.16.5         | Java 8                   | Java 11 or 16                | Java 8 works, but Java 11 or 16 can improve performance; some mods require Java 16. |
+| 1.17 - 1.17.1         | Java 16                  | Java 17                      | Java 16 is required; Java 17 is recommended for better performance.        |
+| 1.18 - 1.20.4         | Java 17                  | Java 17                      | Java 17 is the minimum and recommended version.                           |
+| 1.20.5 - 1.21.4       | Java 21                  | Java 21                      | Java 21 is required starting with 1.20.5 due to updated class file versions. |
+
 ## Usage
 
 ### Server Management
