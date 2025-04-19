@@ -2,7 +2,7 @@ from typing import List, Dict, Any, Type
 import importlib
 
 # List of supported server types
-SUPPORTED_SERVER_TYPES = ["vanilla", "paper", "purpur"]
+SUPPORTED_SERVER_TYPES = ["vanilla", "paper", "purpur", "fabric", "forge"]
 
 # Base Downloader class that all specific downloaders will inherit from
 class ServerDownloader:
