@@ -102,8 +102,7 @@ def verify_java_version(java_path: str, min_version: int = 17) -> bool:
     """Verify that the Java executable meets minimum version requirements."""
     try:
         result = subprocess.run([java_path, "-version"], 
-                               capture_output=True, text=True, stderr=subprocess.STDOUT)
-        
+                               stdout=subprocess.PIPE, text=True, stderr=subprocess.STDOUT, check=True)
         # Parse Java version from output
         version_output = result.stdout.strip()
         
@@ -127,5 +126,6 @@ def verify_java_version(java_path: str, min_version: int = 17) -> bool:
         
         return False
         
-    except (subprocess.SubprocessError, ValueError, IndexError):
+    except (subprocess.SubprocessError, ValueError, IndexError) as e:
+        print("Error parsing Java version", e)
         return False
