@@ -15,65 +15,54 @@
 
 </div>
 
-## ✨ Features
+## Features
 
-- 🚀 **Multi-Server Support**: Download and manage Vanilla, Paper, or Purpur servers
-- ⚙️ **Effortless Configuration**: Set up server properties via CLI flags or interactive wizard
-- 🔌 **Plugin Management**: Search, install, and manage plugins from multiple sources
-- 🛠️ **Version Control**: Easily switch between Minecraft versions with proper Java compatibility
-- 📊 **Performance Optimization**: Configure memory settings and server properties for optimal performance
-- 💻 **Cross-Platform**: Works seamlessly on Windows, macOS, and Linux
+- Download and manage Vanilla, Paper, Purpur, Forge, and Fabric servers
+- Configure server properties via command-line or interactive wizard
+- Search and install plugins from Modrinth and SpigotMC
+- Switch between Minecraft versions with automatic Java compatibility checks
+- Manage server memory settings and performance options
+- Cross-platform support for Windows, macOS, and Linux
 
-## 📋 Installation
+## Installation
 
-### Prerequisites
+### Requirements
 
 - Python 3.9 or higher
 - Java 17 or higher (for running Minecraft servers)
 
-### Installation Methods
+### Install from Source
 
-#### From Source
 ```bash
 git clone https://github.com/yousuf-shahzad/nex.git
 cd nex
 pip install -e .
 ```
 
-## 🚀 Quick Start
+## Quick Start
 
 ```bash
-# Download and set up a Paper server in one command
-nex setup --dir my_server --version 1.20.1 --type paper --difficulty normal --motd "My Awesome Server"
+# Download and set up a Paper server
+nex setup --dir my_server --version 1.20.1 --type paper --difficulty normal --motd "My Server"
 
 # Start your server
 cd my_server
 nex run --ram 4G
 ```
 
-## 📁 Project Structure
-
-```
-nex/
-├── cli/           # Command-line interface implementation
-├── core/          # Core functionality
-├── plugins/       # Plugin management system
-├── utils/         # Utility functions
-├── config/        # Configuration handling
-└── downloaders/   # Server download implementations
-```
-
-## 💻 Usage
+## Usage
 
 ### Server Management
 
-### Sign EULA
+#### Sign EULA
+
 ```bash
 # Sign the EULA
 nex sign
 ```
 
 #### Download a Server
+
 ```bash
 # Download the latest vanilla server
 nex download latest vanilla
@@ -86,6 +75,7 @@ nex download 1.19.4 purpur
 ```
 
 #### List Available Versions
+
 ```bash
 # List available vanilla versions
 nex list-versions vanilla
@@ -95,6 +85,7 @@ nex list-versions paper
 ```
 
 #### Server Setup
+
 ```bash
 # Set up with default settings
 nex setup --dir my_server --version 1.20.1 --type paper
@@ -112,6 +103,7 @@ nex setup --interactive
 ```
 
 #### Run a Server
+
 ```bash
 # Run with default settings (2GB RAM)
 nex run
@@ -125,9 +117,8 @@ nex run --nogui
 
 ### Plugin Management
 
-Nex provides a comprehensive plugin management system with support for multiple sources and automatic dependency handling.
-
 #### Supported Plugin Sources
+
 - SpigotMC
 - Modrinth
 
@@ -164,9 +155,9 @@ nex plugins check-deps <server_dir> <plugin_name>
 nex plugins configure <server_dir> <plugin_name> <key1>=<value1> [<key2>=<value2> ...]
 ```
 
-## 📊 Minecraft Server Version and Java Compatibility Matrix
+## Minecraft Server Version and Java Compatibility
 
-Below is a compatibility matrix for Minecraft server versions and their corresponding Java version requirements:
+Compatibility matrix for Minecraft server versions and Java requirements:
 
 | **Minecraft Version** | **Minimum Java Version** | **Recommended Java Version** | **Notes**                                                                 |
 |-----------------------|--------------------------|------------------------------|---------------------------------------------------------------------------|
@@ -177,9 +168,10 @@ Below is a compatibility matrix for Minecraft server versions and their correspo
 | 1.18 - 1.20.4         | Java 17                  | Java 17                      | Java 17 is the minimum and recommended version.                           |
 | 1.20.5 - 1.21.4       | Java 21                  | Java 21                      | Java 21 is required starting with 1.20.5 due to updated class file versions. |
 
-## 📚 Examples
+## Examples
 
 ### Complete Server Setup
+
 ```bash
 # Create a new directory for the server
 mkdir my_minecraft_server
@@ -194,42 +186,43 @@ nex run --ram 4G
 ```
 
 ### Quick Setup with One Command
+
 ```bash
 # Set up and configure in one command
 nex setup --dir my_server \
     --version 1.20.1 \
     --type paper \
     --difficulty hard \
-    --motd "My Awesome Server" \
+    --motd "My Server" \
     --max-players 10
 ```
 
-## 📝 Roadmap
+## Roadmap
 
-Here are some features planned for future releases:
+Planned features for future releases:
 
-- **Backup and Restore**: Backup and restore functionality
-- **Forge & Fabric Support**: Download and manage modded server types
-- **Mod Management**: Install and configure mods similar to plugins
-- **Additional Plugin Sources**: Integration with Bukkit and other repositories
-- **Scheduled Backups**: Automated backup scheduling
-- **Web Interface**: Easy server management through a browser
+- Backup and restore functionality
+- Forge and Fabric support for modded servers
+- Mod management similar to plugin management
+- Additional plugin sources (Bukkit and others)
+- Scheduled automated backups
+- Web-based server management interface
 
-## 🤝 Contributing
+## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions are welcome. To contribute:
 
 1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
+2. Create your feature branch (`git checkout -b feature/your-feature`)
+3. Commit your changes (`git commit -m 'Add feature'`)
+4. Push to the branch (`git push origin feature/your-feature`)
 5. Open a Pull Request
 
-## 📝 License
+## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - The Minecraft community
 - [Paper](https://papermc.io/) and [Purpur](https://purpurmc.org/) projects
